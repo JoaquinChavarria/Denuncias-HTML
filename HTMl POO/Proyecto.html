@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expediente de Caso</title>
+    <link rel="stylesheet" href="Estilo.css">
+</head>
+<body>
+    <h1>Expediente de Caso</h1>
+
+    <div class="container">
+
+        <!-- Lugar del Delito -->
+        <div class="input-group">
+            <h2>Lugar y Fecha del Delito</h2>
+            <label for="crimeLocation">Lugar del Delito:</label>
+            <input type="text" id="crimeLocation" class="input-field">
+        </div>
+
+        <!-- Estado del Caso -->
+        <div class="input-group">
+            <h2>Estado del Caso</h2>
+            <label for="caseStatus">Estado del Caso:</label>
+            <select id="caseStatus" class="input-field">
+                <option value="Abierto">Abierto</option>
+                <option value="En Proceso">En Proceso</option>
+                <option value="Cerrado">Cerrado</option>
+            </select>
+        </div>
+
+        <!-- Delitos Cometidos -->
+        <div class="input-group">
+            <h2>Delitos Cometidos</h2>
+            <label for="crime">Tipo de Delito:</label>
+            <input type="text" id="crime" class="input-field">
+            <button onclick="addToList('crime', 'crimesList')">Guardar Delito</button>
+            <ul id="crimesList" class="output-list">
+                <!-- La lista de delitos se llenará dinámicamente -->
+            </ul>
+        </div>
+
+        <!-- Denunciantes -->
+        <div class="input-group">
+            <h2>Denunciantes</h2>
+            <label for="complainant">Nombre del Denunciante:</label>
+            <input type="text" id="complainant" class="input-field">
+            <button onclick="addToList('complainant', 'complainantsList')">Guardar Denunciante</button>
+            <ul id="complainantsList" class="output-list">
+                <!-- La lista de denunciantes se llenará dinámicamente -->
+            </ul>
+        </div>
+
+        <!-- Denunciados y Delitos -->
+        <div class="input-group">
+            <h2>Denunciados</h2>
+            <label for="accused">Nombre del Denunciado:</label>
+            <input type="text" id="accused" class="input-field">
+            <button onclick="addToList('accused', 'accusedList')">Guardar Denunciado</button>
+            <ul id="accusedList" class="output-list">
+                <!-- La lista de denunciados se llenará dinámicamente -->
+            </ul>
+        </div>
+
+        <!-- Descripción del Hecho -->
+        <div class="input-group">
+            <h2>Descripción del Hecho</h2>
+            <textarea id="description" class="input-field" rows="4"></textarea>
+        </div>
+
+        <!-- Botón de Guardar Denuncia -->
+        <div style="text-align: center;">
+            <button id="guardarDenuncia">Guardar Denuncia</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Función para agregar elementos a la lista
+        function addToList(inputId, listId) {
+            var input = document.getElementById(inputId);
+            var value = input.value;
+            if (value.trim() !== "") {
+                var list = document.getElementById(listId);
+                var listItem = document.createElement("li");
+                listItem.textContent = value;
+                list.appendChild(listItem);
+                input.value = "";
+            }
+        }
+
+        // Función para guardar la denuncia
+        document.getElementById("guardarDenuncia").onclick = function() {
+            var lugarDelito = document.getElementById("crimeLocation").value;
+            var estadoCaso = document.getElementById("caseStatus").value;
+            var delitos = document.getElementById("crimesList").innerText;
+            var denunciantes = document.getElementById("complainantsList").innerText;
+            var denunciados = document.getElementById("accusedList").innerText;
+            var descripcion = document.getElementById("description").value;
+
+            alert("Lugar del Delito: " + lugarDelito + "\nEstado del Caso: " + estadoCaso + "\nDelitos Cometidos: " + delitos + "\nDenunciantes: " + denunciantes + "\nDenunciados: " + denunciados + "\nDescripción del Hecho: " + descripcion);
+        };
+    </script>
+</body>
+</html>
